@@ -6,7 +6,7 @@
             <t t-set="head">
                 <t t-call-assets="web.assets_frontend"/>
             </t>
-            <body>
+            <body class="scrollable">
                 <header>
                     <nav>
                         <ul>

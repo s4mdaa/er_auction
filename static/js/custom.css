@@ -274,3 +274,8 @@ nav li a:hover {
 h1 {
   margin-top: 20px;
 }
+
+.scrollable {
+  height: 100vh;
+  overflow-y: auto;
+}
