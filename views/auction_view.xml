@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="_get_auction_info" model="ir.cron">
+        <field name="name">Get Auction Info</field>
+        <field name="active" eval="True" />
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="nextcall" eval="(DateTime.now())" />
+        <field name="numbercall">-1</field>
+        <field name="model_name" eval="'er.auction'" />
+        <field name="model_id" ref="er_auction.model_er_auction" />
+        <field name="state">code</field>
+        <field name="code">model._get_auction_info()</field>
+    </record>
+    <!-- Tree View -->
+    <record model="ir.ui.view" id="your_model_tree_view">
+        <field name="name">er.auction.tree.view</field>
+        <field name="model">er.auction</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="sender"/>
+                <field name="code"/>
+                <field name="instrument"/>
+                <field name="status"/>
+                <field name="is_public"/>
+                <field name="direction"/>
+                <field name="ccp_account"/>
+                <field name="type"/>
+                <field name="currency"/>
+                <field name="volume"/>
+                <field name="lot_size"/>
+                <field name="announce_time"/>
+                <field name="start_time"/>
+                <field name="close_time"/>
+                <field name="settlement_start_date"/>
+                <field name="settlement_end_date"/>
+                <field name="min_price"/>
+                <field name="max_price"/>
+                <field name="time"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record model="ir.ui.view" id="your_model_form_view">
+        <field name="name">er.auction.form.view</field>
+        <field name="model">er.auction</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="sender"/>
+                        <field name="code"/>
+                        <field name="instrument"/>
+                        <field name="status"/>
+                        <field name="is_public"/>
+                        <field name="direction"/>
+                        <field name="ccp_account"/>
+                        <field name="type"/>
+                        <field name="currency"/>
+                        <field name="volume"/>
+                        <field name="lot_size"/>
+                        <field name="announce_time"/>
+                        <field name="start_time"/>
+                        <field name="close_time"/>
+                        <field name="settlement_start_date"/>
+                        <field name="settlement_end_date"/>
+                        <field name="min_price"/>
+                        <field name="max_price"/>
+                        <field name="time"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record model="ir.actions.act_window" id="auction_action">
+        <field name="name">Auctions</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">er.auction</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem action="auction_action" id="auction_menu" parent="er_auction_root_menu" sequence="1" />
+
+</odoo>

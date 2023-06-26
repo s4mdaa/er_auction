@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="auction_page">
+      <t t-call="web.layout">
+        <t t-set="head">
+            <t t-call-assets="web.assets_frontend"/>
+        </t>
+        <t t-set="page_title" t-value="'Auction'"/>
+        <div class="container">
+        <h2 id="close_time" style="display:none"><t t-esc="auction.close_time"/></h2>
+            <div id="countdown"></div>
+          <h1><t t-esc="auction.code"/></h1>
+          <button id="place_bid_btn">Place Bid</button>
+        </div>
+        <div id="popup" class="popup">
+          <div class="popup-content">
+            <h3>Place Bid</h3>
+              <form id="bid_form" action="/auction/place/bid" method="POST">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+                <input type="hidden" name="auctionId" id="auctionId" t-att-value="auction.id" />
+                <p>Enter price:</p>
+                <input type="text" name="price" id="price" pattern="\d+(\.\d+)?" required ="1"/>
+                <p>Enter volume:</p>
+                <input type="text" name="volume" id="volume" pattern="\d+(\.\d+)?" required ="1"/>
+                <p>Select an account:</p>
+                <select name="account" id="account">
+                  <t t-foreach="accounts" t-as="account">
+                    <option t-att-value="account['code']"><t t-esc="account['code']"/></option>
+                  </t>
+                </select>
+                <button type="submit">Submit</button>
+              </form>
+            <button id="close_popup_btn">Close</button>
+          </div>
+        </div>
+        <h2>Orderbook</h2>
+<hr/>
+<div class="order">
+  <div class="tleft">
+    <table id="orderbook">
+      <tr>
+        <th>Datetime</th>
+        <th>Account</th>
+        <th>Volume</th>
+        <th>Price</th>    
+      </tr>
+      <tr>
+        <td>2023-06-21T10:17:31.788687+03:00</td>
+        <td>****</td>
+        <td>20.0</td>
+        <td>170</td>
+      </tr>
+      <tr>
+        <td>2023-06-21T10:17:31.788687+03:00</td>
+        <td>ParticA</td>
+        <td>10.0</td>
+        <td>169</td>
+      </tr>
+      <tr>
+        <td>2023-06-21T10:17:31.788687+03:00</td>
+        <td>****</td>
+        <td>20.0</td>
+        <td>168</td>
+      </tr>
+      <tr>
+        <td>2023-06-21T10:17:31.788687+03:00</td>
+        <td>****</td>
+        <td>20.0</td>
+        <td>166</td>
+      </tr>
+      <tr>
+        <td>2023-06-21T10:17:31.788687+03:00</td>
+        <td>****</td>
+        <td>20.0</td>
+        <td>166</td>
+      </tr>
+      <tr>
+        <td>2023-06-21T10:17:31.788687+03:00</td>
+        <td>ParticA</td>
+        <td>20.0</td>
+        <td>166</td>
+      </tr>
+      <tr>
+        <td>2023-06-21T10:17:31.788687+03:00</td>
+        <td>****</td>
+        <td>20.0</td>
+        <td>166</td>
+      </tr>
+      <tr>
+        <td>2023-06-21T10:17:31.788687+03:00</td>
+        <td>****</td>
+        <td>20.0</td>
+        <td>166</td>
+      </tr>
+    </table>
+  </div>
+  <div class="tright">
+    <div class="container">
+      <form action="">
+      <div class="row">
+        <div class="col-25">
+          <label for="fname"> Instrument</label>
+        </div>
+        <div class="col-75">
+          <input type="text" value="202309COAL" disabled="1"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="lname">Account</label>
+        </div>
+        <div class="col-75">
+          <input type="text" name="account" placeholder="Select account">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="lname">Volume</label>
+        </div>
+        <div class="col-75">
+          <input type="text" name="volume" placeholder="Voume">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="lname">Price</label>
+        </div>
+        <div class="col-75">
+          <input type="text" name="price" placeholder="Price">
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <input type="submit" value="Submit order">
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+      </t>
+    </template>
+</odoo>

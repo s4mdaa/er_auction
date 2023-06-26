@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="_get_auction_order_info" model="ir.cron">
+        <field name="name">Get Order Info</field>
+        <field name="active" eval="True" />
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="nextcall" eval="(DateTime.now())" />
+        <field name="numbercall">-1</field>
+        <field name="model_name" eval="'er.auction.order'" />
+        <field name="model_id" ref="er_auction.model_er_auction_order" />
+        <field name="state">code</field>
+        <field name="code">model._get_auction_order_info()</field>
+    </record>
+
+    <record id="_get_portfolio_account_info" model="ir.cron">
+        <field name="name">Get Account Porfolio</field>
+        <field name="active" eval="True" />
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="nextcall" eval="(DateTime.now())" />
+        <field name="numbercall">-1</field>
+        <field name="model_name" eval="'er.portfolio.account'" />
+        <field name="model_id" ref="er_auction.model_er_portfolio_account" />
+        <field name="state">code</field>
+        <field name="code">model.get_porfolio_accounts()</field>
+    </record>
+
+    <!-- <record id="_create_auction_order" model="ir.cron">
+        <field name="name">Create Auction Order</field>
+        <field name="active" eval="True" />
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="nextcall" eval="(DateTime.now())" />
+        <field name="numbercall">-1</field>
+        <field name="model_name" eval="'er.auction.order'" />
+        <field name="model_id" ref="er_auction.model_er_auction_order" />
+        <field name="state">code</field>
+        <field name="code">model._create_auction_order()</field>
+    </record> -->
+
+    <!-- Views -->
+    <record model="ir.ui.view" id="er_auction_order_tree_view">
+        <field name="name">er.auction.order.tree</field>
+        <field name="model">er.auction.order</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="sender"/>
+                <field name="reference"/>
+                <field name="auction"/>
+                <field name="state"/>
+                <field name="type"/>
+                <field name="direction"/>
+                <field name="flag"/>
+                <field name="instrument"/>
+                <field name="price"/>
+                <field name="price_type"/>
+                <field name="yield_amount"/>
+                <field name="quantity"/>
+                <field name="date"/>
+                <field name="delivery_point"/>
+                <field name="account"/>
+                <field name="currency"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="er_auction_order_form_view">
+        <field name="name">er.auction.order.form</field>
+        <field name="model">er.auction.order</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="sender"/>
+                        <field name="reference"/>
+                        <field name="auction"/>
+                        <field name="state"/>
+                        <field name="type"/>
+                        <field name="direction"/>
+                        <field name="flag"/>
+                        <field name="instrument"/>
+                        <field name="price"/>
+                        <field name="price_type"/>
+                        <field name="yield_amount"/>
+                        <field name="quantity"/>
+                        <field name="date"/>
+                        <field name="delivery_point"/>
+                        <field name="account"/>
+                        <field name="currency"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record model="ir.actions.act_window" id="auction_order_action">
+        <field name="name">Orders</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">er.auction.order</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem action="auction_order_action" id="auction_order_menu" parent="er_auction_root_menu" sequence="2" />
+
+</odoo>

@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_er_auction_user,er.auction,model_er_auction,er_auction.auction_user,1,0,0,0
+access_er_auction_admin,er.auction,model_er_auction,er_auction.auction_admin,1,1,1,1
+
+
+access_er_auction_order_user,er.auction.order,model_er_auction_order,er_auction.auction_user,1,0,0,0
+access_er_auction_order_admin,er.auction.order,model_er_auction_order,er_auction.auction_admin,1,1,1,1
+
+
+
+access_er_portfolio_account_user,er.portfolio.account,model_er_portfolio_account,er_auction.auction_user,1,0,0,0
+access_er_portfolio_account_admin,er.portfolio.account,model_er_portfolio_account,er_auction.auction_admin,1,1,1,1

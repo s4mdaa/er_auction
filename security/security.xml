@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Группын ангилал -->
+        <record model="ir.module.category" id="auction_category">
+            <field name="name">Дуудлага худалдаа</field>
+            <field name="sequence">1</field>
+        </record>
+        <!-- Групп нэр -->
+        <record id="auction_user" model="res.groups">
+            <field name="name">Хэрэглэгч</field>
+            <field name="category_id" ref="er_auction.auction_category" />
+        </record>
+        <record id="auction_admin" model="res.groups">
+            <field name="name">Админ</field>
+            <field name="category_id" ref="er_auction.auction_category" />
+        </record>
+    </data>
+</odoo>

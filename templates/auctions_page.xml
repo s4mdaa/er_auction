@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="auctions_page">
+
+        <t t-call="web.layout">
+            <t t-set="head">
+                <t t-call-assets="web.assets_frontend"/>
+            </t>
+            <body>
+                <h1>Instrument information</h1>
+                <table id="customers">
+                    <tr>
+                        <th>Instrument</th>
+                        <th>Status</th>
+                        <th>Currency</th>
+                        <th>Volume</th>
+                        <th>Lot</th>
+                        <th>Start Time</th>
+                        <th>Close Time</th>
+                        <th>Settlement Start Time</th>
+                        <th>Settlement Close Time</th>
+                        <th>Min Price</th>
+                        <th>Max Price</th>
+                    </tr>
+                    <t t-foreach="auctions" t-as="auction">
+                        <tr t-att-data-auction-id="auction.code">
+                            <td>
+                                <t t-esc="auction.instrument"/>
+                            </td>
+                            <td>
+                                <t t-esc="auction.status"/>
+                            </td>
+                            <td>
+                                <t t-esc="auction.currency"/>
+                            </td>
+                            <td>
+                                <t t-esc="auction.volume"/>
+                            </td>
+                            <td>
+                                <t t-esc="auction.lot_size"/>
+                            </td>
+                            <td>
+                                <t t-esc="auction.start_time"/>
+                            </td>
+                            <td>
+                                <t t-esc="auction.close_time"/>
+                            </td>
+                            <td>
+                                <t t-esc="auction.settlement_start_date"/>
+                            </td>
+                            <td>
+                                <t t-esc="auction.settlement_end_date"/>
+                            </td>
+                            <td>
+                                <t t-esc="auction.min_price"/>
+                            </td>
+                            <td>
+                                <t t-esc="auction.max_price"/>
+                            </td>
+                        </tr>
+                    </t>
+                </table>
+                <hr/>
+                <div id="orderbook" style="display:none">
+                    <h2>Orderbook</h2>
+                    <hr/>
+                    <div class="order">
+                        <div class="tleft">
+                            <table id="orderbookTable">
+                                <tr>
+                                    <th>Datetime</th>
+                                    <th>Account</th>
+                                    <th>Volume</th>
+                                    <th>Price</th>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="tright">
+                            <div class="container">
+                                <form id="bid_form" action="/auction/place/bid" method="POST">
+                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+                                    <input type="hidden" name="auctionId" id="auctionId" value="" />
+                                    <div class="row">
+                                        <div class="col-25">
+                                            <label for="fname">Instrument</label>
+                                        </div>
+                                        <div class="col-75">
+                                            <input type="text" id="instrument" disabled="1"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-25">
+                                            <label for="lname">Account</label>
+                                        </div>
+                                        <div class="col-75">
+                                            <select name="account" id="accountSelection">
+                                                <option value="account1">Account 1</option>
+                                                <option value="account2">Account 2</option>
+                                                <option value="account3">Account 3</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-25">
+                                            <label for="lname">Volume</label>
+                                        </div>
+                                        <div class="col-75">
+                                            <input type="text" name="volume" placeholder="Voume" pattern="\d+(\.\d+)?" required ="1"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-25">
+                                            <label for="lname">Price</label>
+                                        </div>
+                                        <div class="col-75">
+                                            <input type="text" name="price" placeholder="Price" pattern="\d+(\.\d+)?" required ="1"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <input type="submit" value="Submit order" class="submit-button" />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </body>
+        </t>
+    </template>
+</odoo>
