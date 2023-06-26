@@ -117,10 +117,13 @@ class CustomAuthSignupHome(AuthSignupHome):
         accountsObj = request.env['er.portfolio.account'].search([('code', 'like', accountCode)])
         orders = []
         for orderObj in ordersObj:
+            account = orderObj.account
+            if accountsObj[0].code != orderObj.account:
+                account = '*****'
 
             order = {
                 'date': auction.convert_timestamp(orderObj.date),
-                'account': orderObj.account,
+                'account': account,
                 'price': orderObj.price,
                 'volume': orderObj.quantity,
             }

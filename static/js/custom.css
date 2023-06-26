@@ -208,6 +208,69 @@ input[type=submit]:hover {
 }
 
 .submit-button:hover {
-  background-color: #45a049;
+  background-color: #45a098;
   /* Darker green background on hover */
+}
+
+header {
+  background-color: #bafff9;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+nav li {
+  margin-right: 10px;
+}
+
+nav li a {
+  display: block;
+  color: #333;
+  text-decoration: none;
+  padding: 5px;
+}
+
+nav li a:hover {
+  background-color: #ddd;
+  border-radius: 5px;
+}
+
+.logout-menu {
+  margin-left: auto;
+}
+
+.logout-menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.logout-menu li {
+  margin-left: 10px;
+}
+
+.logout-menu li a {
+  display: block;
+  color: #333;
+  text-decoration: none;
+  padding: 5px;
+}
+
+.logout-menu li a:hover {
+  background-color: #ddd;
+  border-radius: 5px;
+}
+
+h1 {
+  margin-top: 20px;
 }

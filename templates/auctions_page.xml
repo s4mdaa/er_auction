@@ -7,6 +7,31 @@
                 <t t-call-assets="web.assets_frontend"/>
             </t>
             <body>
+                <header>
+                    <nav>
+                        <ul>
+                            <li>
+                                <a href="/auctions">Нүүр хуудас</a>
+                            </li>
+                            <li>
+                                <a href="#">Захиалга</a>
+                            </li>
+                            <li>
+                                <a href="#">Дансны шинжилгээ</a>
+                            </li>
+                            <li>
+                                <a href="#">Мөнгө хүсэх</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="logout-menu">
+                        <ul>
+                            <li>
+                                <a href="#">Гарах</a>
+                            </li>
+                        </ul>
+                    </div>
+                </header>
                 <h1>Instrument information</h1>
                 <table id="customers">
                     <tr>
@@ -117,7 +142,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <input type="submit" value="Submit order" class="submit-button" />
+                                        <input type="submit" value="Submit order"/>
                                     </div>
                                 </form>
                             </div>
