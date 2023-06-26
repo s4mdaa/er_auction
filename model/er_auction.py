@@ -4,12 +4,12 @@ from datetime import datetime, timedelta
 
 import requests
 
+
 class ErAuction(models.Model):
 
     _name = "er.auction"
     _order = 'sequence'
     _description = 'Auction'
-
 
     name = fields.Char(string='ID')
     sender = fields.Char(string='Sender')
@@ -55,7 +55,6 @@ class ErAuction(models.Model):
             # Failed to login
             return None
 
-
     def login_to_external_system(self, username, password):
         session = requests.Session()
 
@@ -88,31 +87,35 @@ class ErAuction(models.Model):
             data = response.json()
             for auction in data:
                 auctionObj = self.env['er.auction'].search(
-                    [('name', '=', auction['id'])], limit=1)
-                if not auctionObj:
-                    er_auction_vals = {
-                        'name': auction['id'],
-                        'sender': auction['sender'],
-                        'code': auction['code'],
-                        'instrument': auction['instrument'],
-                        'status': auction['status'],
-                        'is_public': auction['isPublic'],
-                        'direction': auction['direction'],
-                        'ccp_account': auction['ccpAccount'],
-                        'type': auction['type'],
-                        'currency': auction['currency'],
-                        'volume': auction['volume'],
-                        'lot_size': auction['lotSize'],
-                        'announce_time': auction['announceTime'],
-                        'start_time': self.convert_timestamp(auction['startTime']),
-                        'close_time': self.convert_timestamp(auction['closeTime']),
-                        'settlement_start_date': self.convert_timestamp(auction['settlementStartDate']),
-                        'settlement_end_date': self.convert_timestamp('settlementEndDate'),
-                        'min_price': auction['minPrice'],
-                        'max_price': auction['maxPrice'],
-                        'time': auction['time'],
-                    }
+                    [('code', '=', auction['code'])], limit=1)
+                er_auction_vals = {
+                    'name': auction['id'],
+                    'sender': auction['sender'],
+                    'code': auction['code'],
+                    'instrument': auction['instrument'],
+                    'status': auction['status'],
+                    'is_public': auction['isPublic'],
+                    'direction': auction['direction'],
+                    'ccp_account': auction['ccpAccount'],
+                    'type': auction['type'],
+                    'currency': auction['currency'],
+                    'volume': auction['volume'],
+                    'lot_size': auction['lotSize'],
+                    'announce_time': auction['announceTime'],
+                    'start_time': self.convert_timestamp(auction['startTime']),
+                    'close_time': self.convert_timestamp(auction['closeTime']),
+                    'settlement_start_date': self.convert_timestamp(auction['settlementStartDate']),
+                    'settlement_end_date': self.convert_timestamp(auction['settlementEndDate']),
+                    'min_price': auction['minPrice'],
+                    'max_price': auction['maxPrice'],
+                    'time': auction['time'],
+                }
+                if not auctionObj and auction['status'] == 'Opened':
                     self.env['er.auction'].sudo().create(er_auction_vals)
+                if auctionObj and auction['status'] != 'Opened':
+                    auctionObj.sudo().unlink()
+                if auctionObj and auction['status'] == 'Opened':
+                    auctionObj.sudo().write(er_auction_vals)
 
     def convert_timestamp(self, timestamp):
         try:
@@ -142,4 +145,3 @@ class ErAuction(models.Model):
             return formatted_timestamp
         except:
             return False
-

@@ -15,30 +15,43 @@ $(document).ready(function () {
           table.deleteRow(1);
         }
 
-        // Iterate over the orders and create rows in the table
-        for (var i = 0; i < orders.length; i++) {
-          var order = orders[i];
-
+        // Check if orders.length is 0
+        if (orders.length === 0) {
           // Create a new row
-          var newRow = table.insertRow(i + 1);
+          var newRow = table.insertRow(1);
+        
+          // Insert a single cell that spans all columns
+          var emptyCell = newRow.insertCell(0);
+          emptyCell.colSpan = 4;
+          emptyCell.style.textAlign = "center"; // Align the text in the center
+          emptyCell.textContent = "Одоогоор мэдээлэл байхгүй байна";
+        }else {
+          // Loop through the orders and insert rows and cells as before
+          for (var i = 0; i < orders.length; i++) {
+            var order = orders[i];
 
-          // Insert cells for each order property
-          var datetimeCell = newRow.insertCell(0);
-          datetimeCell.textContent = order.date;
+            // Create a new row
+            var newRow = table.insertRow(i + 1);
 
-          var accountCell = newRow.insertCell(1);
-          accountCell.textContent = order.account;
+            // Insert cells for each order property
+            var datetimeCell = newRow.insertCell(0);
+            datetimeCell.textContent = order.date;
 
-          var volumeCell = newRow.insertCell(2);
-          volumeCell.textContent = order.volume;
+            var accountCell = newRow.insertCell(1);
+            accountCell.textContent = order.account;
 
-          var priceCell = newRow.insertCell(3);
-          priceCell.textContent = order.price;
+            var volumeCell = newRow.insertCell(2);
+            volumeCell.textContent = order.volume;
+
+            var priceCell = newRow.insertCell(3);
+            priceCell.textContent = order.price;
+          }
         }
 
+
         $("#instrument").empty();
-        $("#instrument").val(response.auctionCode);
-        $("#auctionId").val(response.auctionCode);
+        $("#instrument").val(response.instrument);
+        $("#auctionCode").val(response.auctionCode);
 
 
         var accounts = response.accounts;

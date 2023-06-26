@@ -84,19 +84,23 @@
                             </td>
                         </tr>
                     </t>
+                    <t t-if="not auctions">
+                        <tr>
+                            <td colspan="11" style="text-align: center;">Одоогоор мэдээлэл байхгүй байна</td>
+                        </tr>
+                    </t>
                 </table>
-                <hr/>
+                <br/>
                 <div id="orderbook" style="display:none">
                     <h2>Orderbook</h2>
-                    <hr/>
                     <div class="order">
                         <div class="tleft">
                             <table id="orderbookTable">
                                 <tr>
-                                    <th>Datetime</th>
-                                    <th>Account</th>
-                                    <th>Volume</th>
-                                    <th>Price</th>
+                                    <th style="width: 200px;">Datetime</th>
+                                    <th style="width: 200px;">Account</th>
+                                    <th style="width: 100px;">Volume</th>
+                                    <th style="width: 100px;">Price</th>
                                 </tr>
                             </table>
                         </div>
@@ -104,7 +108,7 @@
                             <div class="container">
                                 <form id="bid_form" action="/auction/place/bid" method="POST">
                                     <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
-                                    <input type="hidden" name="auctionId" id="auctionId" value="" />
+                                    <input type="hidden" name="auctionCode" id="auctionCode" value="" />
                                     <div class="row">
                                         <div class="col-25">
                                             <label for="fname">Instrument</label>
@@ -141,6 +145,7 @@
                                             <input type="text" name="price" placeholder="Price" pattern="\d+(\.\d+)?" required ="1"/>
                                         </div>
                                     </div>
+                                    <br/>
                                     <div class="row">
                                         <input type="submit" value="Submit order"/>
                                     </div>

@@ -40,7 +40,7 @@ class CustomAuthSignupHome(AuthSignupHome):
         ['/auction/place/bid'],
         type='http', auth="user", website=True)
     def auction_place_bid(self, **post):
-        auction_obj = request.env['er.auction'].sudo().search([('code','=', post.get('auctionId'))])
+        auction_obj = request.env['er.auction'].sudo().search([('code','=', post.get('auctionCode'))])
         
         auction_order_obj = request.env['er.auction.order'].search([], limit=1)
 
@@ -105,7 +105,7 @@ class CustomAuthSignupHome(AuthSignupHome):
 
     @http.route('/auction_orders', type='http', auth='user', website=True, sitemap=False)
     def auction_orders(self, **kw):
-        ordersObj = request.env['er.auction.order'].search([('auction', '=', kw.get('auctionCode'))])
+        ordersObj = request.env['er.auction.order'].search([('auction', '=', kw.get('auctionCode'))], order='price desc')
         auction = request.env['er.auction'].search([('code', '=', kw.get('auctionCode'))])
         if request.env.user.login == 'TraderA1':
             accountCode = 'A01'
@@ -139,7 +139,7 @@ class CustomAuthSignupHome(AuthSignupHome):
 
         data = {
             'orders': orders,
-            'auctionCode': auction.code,
+            'instrument': auction.instrument,
             'auctionCloseTime': auction.close_time,
             'auctionName': auction.name,
             'accounts': accounts,
