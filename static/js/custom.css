@@ -213,7 +213,7 @@ input[type=submit]:hover {
 }
 
 header {
-  background-color: #bafff9;
+  background-color: hsl(198, 38%, 95%);
   padding: 10px;
   display: flex;
   justify-content: space-between;
@@ -276,6 +276,6 @@ h1 {
 }
 
 .scrollable {
-  height: 100vh;
-  overflow-y: auto;
+    height: 100vh;
+    overflow-y: auto;
 }

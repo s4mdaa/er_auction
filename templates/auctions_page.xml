@@ -27,7 +27,7 @@
                     <div class="logout-menu">
                         <ul>
                             <li>
-                                <a href="#">Гарах</a>
+                                <a t-attf-href="/web/session/logout?redirect=/">Гарах</a>
                             </li>
                         </ul>
                     </div>
